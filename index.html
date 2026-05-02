@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br" style="--font: 'Poppins', sans-serif;">
+<head>
+<meta charset="UTF-8">    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIEL</title>
+
+<link rel="stylesheet" href="https://alianca-zx.com.br/css/linktree.css">
+
+<style>
+body {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+}
+
+/* REMOVE LINHAS */
+.sep, .sep::before, .sep::after, h3::after {
+  display: none !important;
+}
+a { text-decoration: none !important; }
+
+.header-overlay {
+  background: transparent;
+}
+
+/* CARDS */
+.card {
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  transition: 0.3s;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: aparecer 0.6s ease forwards;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-bg" style="background-image: url('https://i.imgur.com/VaPTmDN.jpeg');"></div>
+
+  <div class="header-overlay">
+    <h1>ALIANÇA CIEL</h1>
+
+    <div class="socials">
+      <a href="https://wa.me/558189102528" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" width="22">
+      </a>
+    </div>
+  </div>
+
+  <div class="curve"></div>
+</header>
+
+<div class="descricao-topo">
+  Comunidade focada em Divulgação e Entretenimento 🏆
+</div>
+
+<main>
+
+<div class="categoria">Oficial CIEL</div>
+
+<div class="scroll">
+
+  <a href="https://whatsapp.com/channel/0029VbCSJAR47XeHuhDMMh2g" target="_blank" class="card-link">
+    <div class="card oficial">
+      <img src="https://i.imgur.com/Benm8eP.jpeg">
+      <h3>ALIANÇA CIEL</h3>
+      <p>Fique por dentro de tudo na CIEL através do canal!</p>
+    </div>
+  </a>
+
+  <a href="https://chat.whatsapp.com/JSbeogWBjWwDC4sJohrBgB?mode=gi_t" target="_blank" class="card-link">
+    <div class="card">
+      <img src="https://i.imgur.com/QOS7lYu.jpeg">
+      <h3>ALIANÇA CIEL</h3>
+      <p>Entre no grupo oficial da Aliança CIEL e participe da comunidade!</p>
+    </div>
+  </a>
+
+</div>
+
+</main>
+
+<!-- 🎵 MÚSICA COM FADE-IN -->
+<audio id="musica" autoplay loop muted>
+  <source src="https://raw.githubusercontent.com/alianca-ciel/Alian-a-Ciel/main/elpis.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const audio = document.getElementById("musica");
+
+// inicia carregando
+window.addEventListener("load", () => {
+  audio.volume = 0;
+  audio.play().catch(()=>{});
+});
+
+// ativa som com fade-in
+document.addEventListener("click", () => {
+  audio.muted = false;
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    if (vol < 0.3) {
+      vol += 0.02;
+      audio.volume = vol;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+});
+</script>
+
+</body>
+</html>
