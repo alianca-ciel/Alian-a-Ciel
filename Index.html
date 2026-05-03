@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-br" style="--font: 'Poppins', sans-serif;">
+<head>
+<meta charset="UTF-8">    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIEL</title>
+
+<link rel="stylesheet" href="https://alianca-zx.com.br/css/linktree.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;70&display=swap');
+
+body {
+  background: linear-gradient(135deg, #0a0f1f, #121a2f, #0f172a);
+  color: white;
+  overflow-x: hidden;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* REMOVE LINHAS */
+.sep, .sep::before, .sep::after, h3::after {
+  display: none !important;
+}
+a { text-decoration: none !important; }
+
+.header-overlay {
+  background: transparent;
+}
+
+/* ===== CARDS ESTILO IGUAL A IMAGEM ===== */
+.card {
+  min-width: 230px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #1a1d26, #11141b);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    inset 4px 4px 8px rgba(0, 0, 0, 0.5),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.05),
+    0 0 18px rgba(0,0,0,.5);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: aparecer 0.6s ease forwards;
+  overflow: hidden;
+  padding: 14px;
+}
+
+.card:hover {
+  border-color: rgba(255, 204, 0, 0.3);
+  box-shadow: 
+    inset 3px 3px 6px rgba(0, 0, 0, 0.6),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.03),
+    0 0 15px rgba(255, 204, 0, 0.1);
+  transform: translateY(-6px) scale(1.02);
+}
+
+.card img {
+  width: 100%;
+  height: 130px;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover img {
+  transform: scale(1.03);
+}
+
+.card h3 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 10px 0 2px;
+  color: #fff;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+/* AQUI ESTÁ A MUDANÇA: REMOVIDO OPACITY PARA FICAR BRANCO PURO */
+.card h3 span {
+  display: block;
+  font-size: 14px;
+  color: #ffffff; /* Branco total */
+  margin-bottom: 4px;
+}
+
+.card p {
+  text-align: center;
+  font-size: 14px;
+  opacity: .8;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== EFEITO DE CHUVA ===== */
+#chuva {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.gota {
+  position: absolute;
+  width: 1px;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(200, 220, 255, 0), rgba(200, 220, 255, 0.6));
+  top: -30px;
+  animation: cair linear infinite;
+  filter: blur(0.5px);
+}
+
+@keyframes cair {
+  0% {
+    top: -30px;
+    opacity: 0;
+    transform: translateX(0);
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    top: 100vh;
+    opacity: 0.3;
+    transform: translateX(-5px);
+  }
+}
+
+/* ===== EFEITO DE TROVÃO ===== */
+#trovao {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(180, 210, 255, 0.8) 40%, rgba(0,0,0,0) 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transition: opacity 0.1s ease;
+}
+
+#trovao.ativo {
+  opacity: 0.3;
+}
+
+/* ===== BOTÕES DE MÚSICA LADO A LADO ===== */
+.controles-musica {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 25px auto;
+  width: 90%;
+  max-width: 400px;
+}
+
+.btn-musica {
+  flex: 1;
+  padding: 12px 10px;
+  border-radius: 12px;
+  border: none;
+  background: #12151d;
+  color: #e0e0e0;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 
+    inset 3px 3px 6px rgba(0, 0, 0, 0.5),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+}
+
+.btn-musica span {
+  font-size: 16px;
+}
+
+.btn-musica:hover {
+  background: #1a1e29;
+  color: #ffcc00;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.03),
+    0 0 12px rgba(255, 204, 0, 0.2);
+}
+
+.btn-musica.ativo {
+  background: #1a1e29;
+  color: #ffcc00;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.03),
+    0 0 15px rgba(255, 204, 0, 0.3);
+}
+</style>
+</head>
+
+<body>
+
+<!-- CAMADA DE CHUVA -->
+<div id="chuva"></div>
+
+<!-- CAMADA DE TROVÃO -->
+<div id="trovao"></div>
+
+<header class="header">
+  <div class="header-bg" style="background-image: url('https://i.imgur.com/VaPTmDN.jpeg');"></div>
+
+  <div class="header-overlay">
+    <h1>ALIANÇA CIEL</h1>
+
+    <div class="socials">
+      <a href="https://wa.me/5581989102528" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" width="22">
+      </a>
+    </div>
+  </div>
+
+  <div class="curve"></div>
+</header>
+
+<div class="descricao-topo">
+  Comunidade focada em Divulgação e Entretenimento 🏆
+</div>
+
+<!-- BOTÕES DE CONTROLE LADO A LADO -->
+<div class="controles-musica">
+  <button class="btn-musica" id="btnPrev" title="Anterior">
+    <span>&#9664;&#9664;</span> VOLTA
+  </button>
+  
+  <button class="btn-musica" id="btnPlay" title="Play / Pause">
+    <span id="playIcon">&#9654;</span> PLAY/PAUSE
+  </button>
+  
+  <button class="btn-musica" id="btnNext" title="Próxima">
+    <span>&#9654;&#9654;</span> AVANÇAR
+  </button>
+</div>
+
+<main>
+
+<div class="categoria">Oficial CIEL</div>
+
+<div class="scroll">
+
+  <a href="https://whatsapp.com/channel/0029VbCSJAR47XeHuhDMMh2g" target="_blank" class="card-link">
+    <div class="card oficial">
+      <img src="https://i.imgur.com/Benm8eP.jpeg" alt="Canal CIEL">
+      <h3>ALIANÇA CIEL</h3>
+      <p>Fique por dentro de tudo na CIEL através do canal!</p>
+    </div>
+  </a>
+
+  <a href="https://chat.whatsapp.com/JSbeogWBjWwDC4sJohrBgB?mode=gi_t" target="_blank" class="card-link">
+    <div class="card">
+      <img src="https://i.imgur.com/QOS7lYu.jpeg" alt="Grupo CIEL">
+      <h3>ALIANÇA CIEL</h3>
+      <p>Entre no grupo oficial da Aliança CIEL e participe da comunidade!</p>
+    </div>
+  </a>
+
+</div>
+
+<!-- ===== GRUPOS ALIADOS ===== -->
+<div class="categoria">Grupos Aliados</div>
+
+<div class="scroll">
+
+  <a href="https://chat.whatsapp.com/FJygIUkjEX26srfbbDLlBE?mode=gi_t" target="_blank" class="card-link">
+    <div class="card">
+      <img src="https://i.imgur.com/2Dl4Zoy.jpeg" alt="Grupo Aliado">
+      <h3>KAYROS-BOT | SUPORTE</h3>
+      <p>Grupo de suporte e ajuda!</p>
+    </div>
+  </a>
+
+</div>
+
+<!-- ===== CHANNELS ALIADAS ===== -->
+<div class="categoria">Channels Aliadas</div>
+
+<div class="scroll">
+
+  <a href="https://whatsapp.com/channel/0029Vb6qPudIiRomOxJct93B" target="_blank" class="card-link">
+    <div class="card">
+      <img src="https://i.imgur.com/2Dl4Zoy.jpeg" alt="Canal Aliado">
+      <h3><span>CHANNEL</span>KAYROS-BOT SUPORTE</h3>
+      <p>Acompanhe as novidades!</p>
+    </div>
+  </a>
+
+</div>
+
+</main>
+
+<!-- 🎵 MÚSICA -->
+<audio id="musica" loop>
+  <source src="https://raw.githubusercontent.com/alianca-ciel/Alian-a-Ciel/main/elpis.mp3" type="audio/mpeg">
+
+
+<script>
+const musica = document.getElementById("musica");
+const btnPlay = document.getElementById("btnPlay");
+const btnPrev = document.getElementById("btnPrev");
+const btnNext = document.getElementById("btnNext");
+const playIcon = document.getElementById("playIcon");
+const trovao = document.getElementById("trovao");
+
+let tocando = false;
+
+// Função para iniciar música
+function iniciarMusica() {
+  if (!tocando) {
+    musica.play().then(() => {
+      tocando = true;
+      playIcon.innerHTML = "&#9612;&#9612;";
+      btnPlay.classList.add("ativo");
+    }).catch(() => {});
+  }
+}
+
+document.addEventListener("click", iniciarMusica, { once: true });
+
+// Controle Play/Pause
+btnPlay.addEventListener("click", () => {
+  if (tocando) {
+    musica.pause();
+    playIcon.innerHTML = "&#9654;";
+    btnPlay.classList.remove("ativo");
+  } else {
+    musica.play();
+    playIcon.innerHTML = "&#9612;&#9612;";
+    btnPlay.classList.add("ativo");
+  }
+  tocando = !tocando;
+});
+
+// Botão Anterior - Volta para o começo
+btnPrev.addEventListener("click", () => {
+  musica.currentTime = 0;
+});
+
+// Botão Próxima - Avança um pouco
+btnNext.addEventListener("click", () => {
+  musica.currentTime += 10; // Avança 10 segundos
+});
+
+// Efeito Chuva
+const chuvaEl = document.getElementById('chuva');
+const quantidadeGotas = 50;
+
+for (let i = 0; i < quantidadeGotas; i++) {
+  criarGota();
+}
+
+function criarGota() {
+  const gota = document.createElement('div');
+  gota.classList.add('gota');
+  
+  const left = Math.random() * 100;
+  const duracao = 2.5 + Math.random() * 3;
+  const atraso = Math.random() * 5;
+  const tamanho = 1 + Math.random() * 1;
+
+  gota.style.left = left + 'vw';
+  gota.style.animationDuration = duracao + 's';
+  gota.style.animationDelay = atraso + 's';
+  gota.style.width = tamanho + 'px';
+
+  chuvaEl.appendChild(gota);
+}
+
+// Efeito Trovão Realista
+function fazerTrovao() {
+  trovao.classList.add('ativo');
+  setTimeout(() => {
+    trovao.classList.remove('ativo');
+    if(Math.random() > 0.5) {
+      setTimeout(() => {
+        trovao.classList.add('ativo');
+        setTimeout(() => trovao.classList.remove('ativo'), 100);
+      }, 150);
+    }
+  }, 180);
+  
+  const proximo = 7000 + Math.random() * 7000;
+  setTimeout(fazerTrovao, proximo);
+}
+
+setTimeout(fazerTrovao, 4000);
+</script>
+
+</body>
+</html>
